@@ -3,7 +3,7 @@
 
 # $PSScriptRoot here is the Core\ directory; go up one level to reach the module root.
 $script:ModuleRoot      = Split-Path $PSScriptRoot -Parent
-$script:CredentialsPath = Join-Path $script:ModuleRoot '.veracode' 'credentials'
+$script:CredentialsPath = Join-Path (Join-Path $script:ModuleRoot '.veracode') 'credentials'
 
 function Get-VcCredential {
     <#

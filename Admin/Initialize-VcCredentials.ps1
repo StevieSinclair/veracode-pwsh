@@ -17,7 +17,7 @@ function Initialize-VcCredentials {
         [switch]$Force
     )
 
-    $credPath = Join-Path (Split-Path $PSScriptRoot -Parent) '.veracode' 'credentials'
+    $credPath = Join-Path (Join-Path (Split-Path $PSScriptRoot -Parent) '.veracode') 'credentials'
 
     Write-Host ""
     Write-Host "╔══════════════════════════════════════════════════╗"
