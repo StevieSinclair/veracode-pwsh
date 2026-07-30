@@ -210,8 +210,8 @@ function Export-VcAnalysisReport {
 <h1>$title</h1>
 <div class="meta">
   Application GUID: $AppGuid &nbsp;|&nbsp;
-  Policy: $($app.PolicyName ?? 'None') &nbsp;|&nbsp;
-  Compliance: $($app.PolicyCompliance ?? 'N/A') &nbsp;|&nbsp;
+  Policy: $(if ($null -ne $app.PolicyName) { $app.PolicyName } else { 'None' }) &nbsp;|&nbsp;
+  Compliance: $(if ($null -ne $app.PolicyCompliance) { $app.PolicyCompliance } else { 'N/A' }) &nbsp;|&nbsp;
   Total open findings: $($findings.Count)$(if ($ScanType) { " [$ScanType]" })
 </div>
 $sectionsHtml

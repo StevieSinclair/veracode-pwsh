@@ -66,8 +66,12 @@ function ConvertTo-VcScaFinding {
         $cveIds = @($d.cve_id)
     }
 
-    $cvss2 = [double]($d.cvss_score  ?? 0)
-    $cvss3 = [double]($d.cvss3_score ?? 0)
+    $cvss2 = if ($null -ne $d.cvss_score)  { [double]$d.cvss_score }  else { [double]0 }
+    $cvss3 = if ($null -ne $d.cvss3_score) { [double]$d.cvss3_score } else { [double]0 }
+    $daysOpen = $null
+    if ($null -ne $s -and $null -ne $s.first_found_date) {
+        $daysOpen = [int]([DateTimeOffset]::UtcNow - [DateTimeOffset]::Parse($s.first_found_date)).TotalDays
+    }
 
     [pscustomobject]@{
         IssueId          = $Raw.issue_id
@@ -76,11 +80,11 @@ function ConvertTo-VcScaFinding {
         Severity         = $Raw.severity
         SeverityLabel    = $script:VcSeverityLabels[[int]$Raw.severity]
         CweId            = $Raw.cwe_id
-        CweName          = $d.cwe?.name
+        CweName          = $(if ($null -ne $d.cwe) { $d.cwe.name } else { $null })
         # Library info
-        Library          = $d.component_filename ?? $d.file_name
+        Library          = $(if ($null -ne $d.component_filename) { $d.component_filename } else { $d.file_name })
         Version          = $d.component_version
-        FixedInVersion   = $d.fixed_version ?? $d.fixed_in_version
+        FixedInVersion   = $(if ($null -ne $d.fixed_version) { $d.fixed_version } else { $d.fixed_in_version })
         HasFix           = [bool]($d.fixed_version -or $d.fixed_in_version)
         # Vulnerability info
         CveIds           = $cveIds
@@ -89,17 +93,14 @@ function ConvertTo-VcScaFinding {
         Cvss3Score       = $cvss3
         MaxCvss          = [Math]::Max($cvss2, $cvss3)
         # License info
-        LicenseName      = $d.license?.name
-        LicenseRisk      = $d.license?.risk_level
+        LicenseName      = $(if ($null -ne $d.license) { $d.license.name } else { $null })
+        LicenseRisk      = $(if ($null -ne $d.license) { $d.license.risk_level } else { $null })
         # Status
-        FlawStatus       = $s?.status
-        MitigationStatus = $s?.mitigation_review_status
-        FirstFoundDate   = $s?.first_found_date
-        LastSeenDate     = $s?.last_seen_date
-        DaysOpen         = if ($s?.first_found_date) {
-                               [int]([DateTimeOffset]::UtcNow -
-                               [DateTimeOffset]::Parse($s.first_found_date)).TotalDays
-                           } else { $null }
+        FlawStatus       = $(if ($null -ne $s) { $s.status } else { $null })
+        MitigationStatus = $(if ($null -ne $s) { $s.mitigation_review_status } else { $null })
+        FirstFoundDate   = $(if ($null -ne $s) { $s.first_found_date } else { $null })
+        LastSeenDate     = $(if ($null -ne $s) { $s.last_seen_date } else { $null })
+        DaysOpen         = $daysOpen
         _Raw             = $Raw
     }
 }

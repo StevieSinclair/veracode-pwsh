@@ -48,7 +48,7 @@ function Get-VcScaExposure {
     foreach ($guid in $AppGuids) {
         $i++
         Write-Progress -Activity 'Scanning for SCA exposure' `
-                       -Status "$($appNameMap[$guid] ?? $guid) ($i / $($AppGuids.Count))" `
+                       -Status "$(if ($null -ne $appNameMap[$guid]) { $appNameMap[$guid] } else { $guid }) ($i / $($AppGuids.Count))" `
                        -PercentComplete ([int](($i / $AppGuids.Count) * 100))
         try {
             $scaParams = @{ AppGuid = $guid; Profile = $Profile }
@@ -69,7 +69,7 @@ function Get-VcScaExposure {
                 $libraryMap[$key]['Findings'].Add($f)
             }
         } catch {
-            Write-Warning "  Could not fetch SCA findings for '$($appNameMap[$guid] ?? $guid)': $_"
+            Write-Warning "  Could not fetch SCA findings for '$(if ($null -ne $appNameMap[$guid]) { $appNameMap[$guid] } else { $guid })': $_"
         }
     }
 
@@ -78,7 +78,7 @@ function Get-VcScaExposure {
     $rows = $libraryMap.Values | Where-Object { $_.AppGuids.Count -ge $MinAppCount } | ForEach-Object {
         $allCves  = @($_.Findings | ForEach-Object { $_.CveIds } | Where-Object { $_ } | Sort-Object -Unique)
         $maxCvss  = [Math]::Round(($_.Findings | Measure-Object MaxCvss -Maximum).Maximum, 1)
-        $appNames = @($_.AppGuids | ForEach-Object { $appNameMap[$_] ?? $_ })
+        $appNames = @($_.AppGuids | ForEach-Object { if ($null -ne $appNameMap[$_]) { $appNameMap[$_] } else { $_ } })
 
         [pscustomobject]@{
             Library     = $_.Library
@@ -111,8 +111,9 @@ function Get-VcScaExposure {
         $name  = if ($r.Library.Length -gt 34) { $r.Library.Substring(0,31) + '...' } else { $r.Library }
         $color = if ($r.IsCritical) { 'Red' } elseif ($r.MaxCvss -ge 7.0) { 'Yellow' } else { 'White' }
         $flag  = if ($r.IsCritical) { '⚠ CRITICAL' } else { '' }
+        $ver = if ($null -ne $r.Version) { $r.Version } else { '?' }
         Write-Host ("  {0,-35}  {1,-10}  {2,4}  {3,5}  {4,5}  {5}" -f `
-            $name, ($r.Version ?? '?'), $r.AppCount, $r.CveCount, $r.MaxCvss, $flag) -ForegroundColor $color
+            $name, $ver, $r.AppCount, $r.CveCount, $r.MaxCvss, $flag) -ForegroundColor $color
         Write-Host ("    Apps: $($r.Apps)") -ForegroundColor DarkGray
     }
     Write-Host ""

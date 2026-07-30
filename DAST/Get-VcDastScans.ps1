@@ -86,15 +86,15 @@ function ConvertTo-VcDastScan {
         AnalysisId    = $Raw.analysis_id
         Name          = $Raw.analysis_name
         Status        = $Raw.status
-        ScanType      = $Raw.analysis_type ?? 'DYNAMIC'
+        ScanType      = $(if ($null -ne $Raw.analysis_type) { $Raw.analysis_type } else { 'DYNAMIC' })
         AppGuid       = $Raw.app_id
-        ScanUrl       = $Raw.scan_url ?? ($Raw.scans | Select-Object -First 1 -ExpandProperty scan_url)
+        ScanUrl       = $(if ($null -ne $Raw.scan_url) { $Raw.scan_url } else { $Raw.scans | Select-Object -First 1 -ExpandProperty scan_url })
         StartTime     = $Raw.start_time
         FinishTime    = $Raw.finish_time
-        ScheduledTime = $Raw.schedule?.start_time
+        ScheduledTime = $(if ($null -ne $Raw.schedule) { $Raw.schedule.start_time } else { $null })
         AgeHours      = $ageHours
         IsStuck       = $isStuck
-        FindingCount  = $Raw.finding_count ?? 0
+        FindingCount  = $(if ($null -ne $Raw.finding_count) { $Raw.finding_count } else { 0 })
         _Raw          = $Raw
     }
 }

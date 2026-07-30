@@ -39,7 +39,7 @@ function Set-VcUser {
             first_name    = $current.first_name
             last_name     = $current.last_name
             user_type     = $current.user_type
-            login_enabled = if ($PSBoundParameters.ContainsKey('LoginEnabled')) { $LoginEnabled } else { $current.login_enabled }
+            login_enabled = $(if ($PSBoundParameters.ContainsKey('LoginEnabled')) { $LoginEnabled } else { $current.login_enabled })
         }
 
         $userBody['roles'] = if ($PSBoundParameters.ContainsKey('Roles')) {

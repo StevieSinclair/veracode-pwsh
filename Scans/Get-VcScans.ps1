@@ -100,11 +100,11 @@ function Get-VcScanHealth {
             $row = [pscustomobject]@{
                 AppName      = $app.Name
                 AppGuid      = $app.Guid
-                Status       = if ($latest) { $latest.Status } else { 'NO_SCANS' }
-                AgeHours     = if ($latest) { $latest.AgeHours } else { $null }
-                IsStuck      = if ($latest) { $latest.AgeHours -gt $ThresholdHours -and $latest.IsStuck } else { $false }
-                SubmittedDate = if ($latest) { $latest.SubmittedDate } else { $null }
-                ScanId       = if ($latest) { $latest.ScanId } else { $null }
+                Status       = $(if ($latest) { $latest.Status } else { 'NO_SCANS' })
+                AgeHours     = $(if ($latest) { $latest.AgeHours } else { $null })
+                IsStuck      = $(if ($latest) { $latest.AgeHours -gt $ThresholdHours -and $latest.IsStuck } else { $false })
+                SubmittedDate = $(if ($latest) { $latest.SubmittedDate } else { $null })
+                ScanId       = $(if ($latest) { $latest.ScanId } else { $null })
             }
             $results.Add($row)
         } catch {
@@ -132,10 +132,10 @@ function ConvertTo-VcScan {
     $isStuck  = ($Raw.scan_status -in $script:VcStuckScanStates) -and ($ageHours -gt 0)
 
     [pscustomobject]@{
-        ScanId        = $Raw.scan_id ?? $Raw.build_id  # REST uses scan_id; XML legacy uses build_id
+        ScanId        = $(if ($null -ne $Raw.scan_id) { $Raw.scan_id } else { $Raw.build_id })  # REST uses scan_id; XML legacy uses build_id
         AppGuid       = $AppGuid
         SandboxGuid   = $SandboxGuid
-        Status        = $Raw.scan_status ?? $Raw.status
+        Status        = $(if ($null -ne $Raw.scan_status) { $Raw.scan_status } else { $Raw.status })
         ScanType      = $Raw.scan_type
         SubmittedDate = $Raw.submitted_date
         AgeHours      = $ageHours

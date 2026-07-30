@@ -174,7 +174,7 @@ function Measure-VcAppMaturity_ {
     }
 
     if ($App.PolicyCompliance -ne 'PASSED') {
-        $improvements.Add("Achieve policy compliance (current: $($App.PolicyCompliance ?? 'NOT_ASSESSED'))")
+        $improvements.Add("Achieve policy compliance (current: $(if ($null -ne $App.PolicyCompliance) { $App.PolicyCompliance } else { 'NOT_ASSESSED' }))")
     }
     if (-not $hasNamedPolicy) {
         $improvements.Add('Assign a named security policy to the application')
@@ -300,7 +300,7 @@ function Show-VcMaturityReport {
         Write-Host "  Dimension Scores:"
         Write-Host "    Scan Coverage        : $($app.ScanCoverage)/3  (Static=$($app.HasStatic), SCA=$($app.HasSca), DAST=$($app.HasDynamic))"
         Write-Host "    Scan Recency         : $($app.ScanRecency)/3  (Last scan: $(if ($app.DaysSinceScan -ne $null) { "$($app.DaysSinceScan) days ago" } else { 'never' }))"
-        Write-Host "    Policy Compliance    : $($app.PolicyCompliance)/3  ($($app.PolicyStatus ?? 'NOT_ASSESSED'), Policy: $($app.PolicyName ?? 'none'))"
+        Write-Host "    Policy Compliance    : $($app.PolicyCompliance)/3  ($(if ($null -ne $app.PolicyStatus) { $app.PolicyStatus } else { 'NOT_ASSESSED' }), Policy: $(if ($null -ne $app.PolicyName) { $app.PolicyName } else { 'none' }))"
 
         $severityColor = if ($app.FindingProfile -lt 0) { 'Red' } elseif ($app.FindingProfile -lt 2) { 'Yellow' } else { 'Green' }
         Write-Host "    Finding Severity     : $($app.FindingProfile)  (VH=$($app.OpenVeryHigh), H=$($app.OpenHigh), Total=$($app.OpenTotal))" -ForegroundColor $severityColor

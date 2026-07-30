@@ -48,7 +48,7 @@ function ConvertTo-VcTeam {
         TeamName        = $Raw.team_name
         BusinessUnit    = $Raw.business_unit.bu_name
         BusinessUnitId  = $Raw.business_unit.bu_id
-        MemberCount     = if ($Raw.users) { @($Raw.users).Count } else { 0 }
+        MemberCount     = $(if ($Raw.users) { @($Raw.users).Count } else { 0 })
         Members         = @($Raw.users | ForEach-Object {
                               [pscustomobject]@{ UserId = $_.user_id; UserName = $_.user_name }
                           })

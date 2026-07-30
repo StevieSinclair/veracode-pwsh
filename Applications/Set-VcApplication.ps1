@@ -43,8 +43,8 @@ function Set-VcApplication {
         $p = $current.profile
 
         $updatedProfile = @{
-            name                 = if ($Name)                { $Name }                else { $p.name }
-            business_criticality = if ($BusinessCriticality) { $BusinessCriticality } else { $p.business_criticality }
+            name                 = $(if ($Name)                { $Name }                else { $p.name })
+            business_criticality = $(if ($BusinessCriticality) { $BusinessCriticality } else { $p.business_criticality })
         }
 
         # Description — only set if explicitly provided; preserve existing otherwise

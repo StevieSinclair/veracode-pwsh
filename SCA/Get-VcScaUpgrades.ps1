@@ -56,7 +56,7 @@ function Get-VcScaUpgrades {
                 CveList        = ($allCves -join ', ')
                 MaxCvss        = $maxCvss
                 FindingsFixed  = $g.Count
-                Priority       = if ($maxCvss -ge 9.0) { 'CRITICAL' } elseif ($maxCvss -ge 7.0) { 'HIGH' } elseif ($maxCvss -ge 4.0) { 'MEDIUM' } else { 'LOW' }
+                Priority       = $(if ($maxCvss -ge 9.0) { 'CRITICAL' } elseif ($maxCvss -ge 7.0) { 'HIGH' } elseif ($maxCvss -ge 4.0) { 'MEDIUM' } else { 'LOW' })
             }
         }
 
@@ -69,8 +69,10 @@ function Get-VcScaUpgrades {
         foreach ($r in $rows) {
             $name  = if ($r.Library.Length -gt 34) { $r.Library.Substring(0,31) + '...' } else { $r.Library }
             $color = switch ($r.Priority) { 'CRITICAL'{'Red'}; 'HIGH'{'Yellow'}; 'MEDIUM'{'Cyan'}; default{'DarkGray'} }
+            $curVer  = if ($null -ne $r.CurrentVersion) { $r.CurrentVersion } else { '?' }
+            $safeVer = if ($null -ne $r.SafeVersion)    { $r.SafeVersion }    else { '?' }
             Write-Host ("  {0,-35}  {1,-12}  {2,-12}  {3,5}  {4,6}  {5,8}" -f `
-                $name, ($r.CurrentVersion ?? '?'), ($r.SafeVersion ?? '?'), $r.CvesResolved, $r.MaxCvss, $r.Priority) -ForegroundColor $color
+                $name, $curVer, $safeVer, $r.CvesResolved, $r.MaxCvss, $r.Priority) -ForegroundColor $color
         }
         Write-Host ""
 

@@ -49,7 +49,7 @@ function Get-VcModuleBreakdown {
                 $moduleMap = @{}
                 $xml.SelectNodes('//flaw') | ForEach-Object {
                     $mod = $_.GetAttribute('module')
-                    $sev = [int]($_.GetAttribute('severity') ?? 0)
+                    $_sev = $_.GetAttribute('severity'); $sev = if ($_sev) { [int]$_sev } else { 0 }
                     if (-not $moduleMap.ContainsKey($mod)) {
                         $moduleMap[$mod] = @{ VH=0; H=0; M=0; L=0; Total=0 }
                     }

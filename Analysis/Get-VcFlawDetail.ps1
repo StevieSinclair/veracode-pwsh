@@ -59,20 +59,20 @@ function Get-VcFlawDetail {
             Severity        = $finding.severity
             SeverityLabel   = $script:VcSeverityLabels[[int]$finding.severity]
             CweId           = $finding.cwe_id
-            CweName         = $finding.finding_details?.cwe?.name
-            FileName        = $finding.finding_details?.file_name
-            LineNumber      = $finding.finding_details?.file_line_number
-            AttackVector    = $finding.finding_details?.attack_vector
-            FlawStatus      = $finding.finding_status?.status
-            MitigationStatus = $finding.finding_status?.mitigation_review_status
+            CweName         = $(if ($null -ne $finding.finding_details) { if ($null -ne $finding.finding_details.cwe) { $finding.finding_details.cwe.name } else { $null } } else { $null })
+            FileName        = $(if ($null -ne $finding.finding_details) { $finding.finding_details.file_name } else { $null })
+            LineNumber      = $(if ($null -ne $finding.finding_details) { $finding.finding_details.file_line_number } else { $null })
+            AttackVector    = $(if ($null -ne $finding.finding_details) { $finding.finding_details.attack_vector } else { $null })
+            FlawStatus      = $(if ($null -ne $finding.finding_status) { $finding.finding_status.status } else { $null })
+            MitigationStatus = $(if ($null -ne $finding.finding_status) { $finding.finding_status.mitigation_review_status } else { $null })
             # Static detail
-            FunctionName    = $detail?.function_name
-            QualifiedFunctionName = $detail?.qualified_function_name
-            CallStack       = $detail?.call_stack
+            FunctionName    = $(if ($null -ne $detail) { $detail.function_name } else { $null })
+            QualifiedFunctionName = $(if ($null -ne $detail) { $detail.qualified_function_name } else { $null })
+            CallStack       = $(if ($null -ne $detail) { $detail.call_stack } else { $null })
             # Dynamic detail
-            Url             = $detail?.url
-            HttpMethod      = $detail?.http_method
-            AttackPayload   = $detail?.attack_payload
+            Url             = $(if ($null -ne $detail) { $detail.url } else { $null })
+            HttpMethod      = $(if ($null -ne $detail) { $detail.http_method } else { $null })
+            AttackPayload   = $(if ($null -ne $detail) { $detail.attack_payload } else { $null })
             _DetailRaw      = $detail
         }
 

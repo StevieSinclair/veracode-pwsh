@@ -67,8 +67,9 @@ function Get-VcScaLibrarySummary {
             $name  = if ($r.Library.Length -gt 34) { $r.Library.Substring(0,31) + '...' } else { $r.Library }
             $color = if ($r.MaxCvss -ge 9.0) { 'Red' } elseif ($r.MaxCvss -ge 7.0) { 'Yellow' } elseif ($r.MaxCvss -ge 4.0) { 'White' } else { 'DarkGray' }
             $fix   = if ($r.HasFix) { 'YES' } else { 'no' }
+            $ver = if ($null -ne $r.Version) { $r.Version } else { 'unknown' }
             Write-Host ("  {0,-35}  {1,-10}  {2,5}  {3,6}  {4,6}  {5,8}  {6,6}  {7}" -f `
-                $name, ($r.Version ?? 'unknown'), $r.CveCount, $r.MaxCvss, $r.HighestSeverity, $r.FindingCount, $fix, $r.FixedInVersion) -ForegroundColor $color
+                $name, $ver, $r.CveCount, $r.MaxCvss, $r.HighestSeverity, $r.FindingCount, $fix, $r.FixedInVersion) -ForegroundColor $color
         }
         Write-Host ""
 

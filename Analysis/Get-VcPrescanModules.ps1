@@ -46,7 +46,7 @@ function Get-VcPrescanModules {
                 Platform     = $node.GetAttribute('platform')
                 Size         = $node.GetAttribute('size')
                 IsSelected   = $node.GetAttribute('is_selected') -eq 'true'
-                WarnCount    = [int]($node.GetAttribute('num_issue') ?? 0)
+                WarnCount    = & { $_ni = $node.GetAttribute('num_issue'); if ($_ni) { [int]$_ni } else { 0 } }
                 Status       = $node.GetAttribute('status')
             }
         }

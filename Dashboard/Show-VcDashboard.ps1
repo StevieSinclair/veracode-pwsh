@@ -82,7 +82,7 @@ function Invoke-VcPaged_ {
             $num  = ($start + $r + 1).ToString().PadRight(5)
             $row  = "  $num"
             foreach ($col in $Columns) {
-                $val = ($slice[$r].$col ?? '').ToString()
+                $val = if ($null -ne $slice[$r].$col) { "$($slice[$r].$col)" } else { '' }
                 if ($val.Length -gt 23) { $val = $val.Substring(0,20) + '...' }
                 $row += $val.PadRight(25)
             }

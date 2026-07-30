@@ -37,8 +37,8 @@ function Get-VcScaLicenses {
             [pscustomobject]@{
                 Library     = $s.Library
                 Version     = $s.Version
-                License     = $s.LicenseName ?? 'Unknown'
-                RiskLevel   = $s.LicenseRisk  ?? 'UNRECOGNIZED'
+                License     = $(if ($null -ne $s.LicenseName) { $s.LicenseName } else { 'Unknown' })
+                RiskLevel   = $(if ($null -ne $s.LicenseRisk)  { $s.LicenseRisk }  else { 'UNRECOGNIZED' })
                 FindingCount = $_.Count
                 MaxCvss     = [Math]::Round(($_.Group | Measure-Object MaxCvss -Maximum).Maximum, 1)
             }
@@ -61,7 +61,8 @@ function Get-VcScaLicenses {
             Write-Host ("  ── $($rg.Name) RISK ($($rg.Count)) ─────────────────────────────────") -ForegroundColor $color
             foreach ($r in ($rg.Group | Sort-Object Library)) {
                 $name = if ($r.Library.Length -gt 35) { $r.Library.Substring(0,32) + '...' } else { $r.Library }
-                Write-Host ("    {0,-35}  {1,-10}  {2,-30}  CVSS:{3}" -f $name, ($r.Version ?? '?'), $r.License, $r.MaxCvss) -ForegroundColor $color
+                $ver = if ($null -ne $r.Version) { $r.Version } else { '?' }
+                Write-Host ("    {0,-35}  {1,-10}  {2,-30}  CVSS:{3}" -f $name, $ver, $r.License, $r.MaxCvss) -ForegroundColor $color
             }
         }
         Write-Host ""

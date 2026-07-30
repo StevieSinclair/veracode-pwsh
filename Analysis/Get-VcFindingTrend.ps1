@@ -66,12 +66,18 @@ function Get-VcFindingTrend {
                                               -Params @{ build_id = $build.BuildId } -Profile $Profile
 
                 # Parse severity counts from summary report XML
-                $vhCount = [int]($summaryXml.SelectSingleNode('//severity[@level="5"]')?.GetAttribute('count') ?? 0)
-                $hCount  = [int]($summaryXml.SelectSingleNode('//severity[@level="4"]')?.GetAttribute('count') ?? 0)
-                $mCount  = [int]($summaryXml.SelectSingleNode('//severity[@level="3"]')?.GetAttribute('count') ?? 0)
-                $lCount  = [int]($summaryXml.SelectSingleNode('//severity[@level="2"]')?.GetAttribute('count') ?? 0)
-                $vlCount = [int]($summaryXml.SelectSingleNode('//severity[@level="1"]')?.GetAttribute('count') ?? 0)
-                $iCount  = [int]($summaryXml.SelectSingleNode('//severity[@level="0"]')?.GetAttribute('count') ?? 0)
+                $_node = $summaryXml.SelectSingleNode('//severity[@level="5"]')
+                $vhCount = if ($null -ne $_node) { [int]$_node.GetAttribute('count') } else { 0 }
+                $_node = $summaryXml.SelectSingleNode('//severity[@level="4"]')
+                $hCount  = if ($null -ne $_node) { [int]$_node.GetAttribute('count') } else { 0 }
+                $_node = $summaryXml.SelectSingleNode('//severity[@level="3"]')
+                $mCount  = if ($null -ne $_node) { [int]$_node.GetAttribute('count') } else { 0 }
+                $_node = $summaryXml.SelectSingleNode('//severity[@level="2"]')
+                $lCount  = if ($null -ne $_node) { [int]$_node.GetAttribute('count') } else { 0 }
+                $_node = $summaryXml.SelectSingleNode('//severity[@level="1"]')
+                $vlCount = if ($null -ne $_node) { [int]$_node.GetAttribute('count') } else { 0 }
+                $_node = $summaryXml.SelectSingleNode('//severity[@level="0"]')
+                $iCount  = if ($null -ne $_node) { [int]$_node.GetAttribute('count') } else { 0 }
 
                 $rows.Add([pscustomobject]@{
                     BuildId       = $build.BuildId

@@ -118,12 +118,12 @@ function Get-VcFindingsSummary {
                 AppName          = $app.Name
                 AppGuid          = $app.Guid
                 PolicyCompliance = $app.PolicyCompliance
-                VeryHigh         = $counts[5] ?? 0
-                High             = $counts[4] ?? 0
-                Medium           = $counts[3] ?? 0
-                Low              = $counts[2] ?? 0
-                VeryLow          = $counts[1] ?? 0
-                Informational    = $counts[0] ?? 0
+                VeryHigh         = $(if ($null -ne $counts[5]) { $counts[5] } else { 0 })
+                High             = $(if ($null -ne $counts[4]) { $counts[4] } else { 0 })
+                Medium           = $(if ($null -ne $counts[3]) { $counts[3] } else { 0 })
+                Low              = $(if ($null -ne $counts[2]) { $counts[2] } else { 0 })
+                VeryLow          = $(if ($null -ne $counts[1]) { $counts[1] } else { 0 })
+                Informational    = $(if ($null -ne $counts[0]) { $counts[0] } else { 0 })
                 Total            = $findings.Count
             })
         } catch {
@@ -162,10 +162,10 @@ function ConvertTo-VcFinding {
         MitigationStatus   = $Raw.finding_status.mitigation_review_status
         FirstFoundDate     = $Raw.finding_status.first_found_date
         LastSeenDate       = $Raw.finding_status.last_seen_date
-        DaysOpen           = if ($Raw.finding_status.first_found_date) {
+        DaysOpen           = $(if ($Raw.finding_status.first_found_date) {
                                  [int]([DateTimeOffset]::UtcNow -
                                  [DateTimeOffset]::Parse($Raw.finding_status.first_found_date)).TotalDays
-                             } else { $null }
+                             } else { $null })
         Annotations        = $Raw.annotations
         _Raw               = $Raw
     }

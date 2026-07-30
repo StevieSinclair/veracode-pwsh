@@ -62,26 +62,26 @@ function ConvertTo-VcDastFinding {
         Severity         = $Raw.severity
         SeverityLabel    = $script:VcSeverityLabels[[int]$Raw.severity]
         CweId            = $Raw.cwe_id
-        CweName          = if ($d) { $d.cwe?.name }           else { $null }
-        Category         = if ($d) { $d.finding_category?.name } else { $null }
-        CategoryId       = if ($d) { $d.finding_category?.id }   else { $null }
+        CweName          = $(if ($d) { if ($null -ne $d.cwe) { $d.cwe.name } else { $null } } else { $null })
+        Category         = $(if ($d) { if ($null -ne $d.finding_category) { $d.finding_category.name } else { $null } } else { $null })
+        CategoryId       = $(if ($d) { if ($null -ne $d.finding_category) { $d.finding_category.id } else { $null } } else { $null })
         # DAST-specific context
-        Url              = if ($d) { $d.url }          else { $null }
-        HttpMethod       = if ($d) { $d.http_method }  else { $null }
-        AttackVector     = if ($d) { $d.attack_vector } else { $null }
-        AttackPayload    = if ($d) { $d.attack_payload } else { $null }
-        Path             = if ($d -and $d.url) {
+        Url              = $(if ($d) { $d.url }          else { $null })
+        HttpMethod       = $(if ($d) { $d.http_method }  else { $null })
+        AttackVector     = $(if ($d) { $d.attack_vector } else { $null })
+        AttackPayload    = $(if ($d) { $d.attack_payload } else { $null })
+        Path             = $(if ($d -and $d.url) {
                                try { ([Uri]$d.url).AbsolutePath } catch { $d.url }
-                           } else { $null }
+                           } else { $null })
         # Status
-        FlawStatus       = if ($s) { $s.status }                   else { $null }
-        MitigationStatus = if ($s) { $s.mitigation_review_status } else { $null }
-        FirstFoundDate   = if ($s) { $s.first_found_date }         else { $null }
-        LastSeenDate     = if ($s) { $s.last_seen_date }           else { $null }
-        DaysOpen         = if ($s -and $s.first_found_date) {
+        FlawStatus       = $(if ($s) { $s.status }                   else { $null })
+        MitigationStatus = $(if ($s) { $s.mitigation_review_status } else { $null })
+        FirstFoundDate   = $(if ($s) { $s.first_found_date }         else { $null })
+        LastSeenDate     = $(if ($s) { $s.last_seen_date }           else { $null })
+        DaysOpen         = $(if ($s -and $s.first_found_date) {
                                [int]([DateTimeOffset]::UtcNow -
                                [DateTimeOffset]::Parse($s.first_found_date)).TotalDays
-                           } else { $null }
+                           } else { $null })
         Annotations      = $Raw.annotations
         _Raw             = $Raw
     }

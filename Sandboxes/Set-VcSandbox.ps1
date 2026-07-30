@@ -32,8 +32,8 @@ function Set-VcSandbox {
         $current = Invoke-VcApi -Path "/appsec/v1/applications/$AppGuid/sandboxes/$SandboxGuid" -Profile $Profile
 
         $body = @{
-            name          = if ($PSBoundParameters.ContainsKey('Name'))        { $Name }        else { $current.name }
-            auto_recreate = if ($PSBoundParameters.ContainsKey('AutoRecreate')){ $AutoRecreate } else { $current.auto_recreate }
+            name          = $(if ($PSBoundParameters.ContainsKey('Name'))        { $Name }        else { $current.name })
+            auto_recreate = $(if ($PSBoundParameters.ContainsKey('AutoRecreate')){ $AutoRecreate } else { $current.auto_recreate })
         }
 
         if (-not $PSCmdlet.ShouldProcess($SandboxGuid, 'Update sandbox')) { return }

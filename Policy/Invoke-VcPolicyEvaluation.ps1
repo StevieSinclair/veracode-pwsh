@@ -33,8 +33,8 @@ function Invoke-VcPolicyEvaluation {
 
         [pscustomobject]@{
             AppGuid          = $AppGuid
-            PolicyGuid       = $raw.policy?.guid
-            PolicyName       = $raw.policy?.name
+            PolicyGuid       = $(if ($null -ne $raw.policy) { $raw.policy.guid } else { $null })
+            PolicyName       = $(if ($null -ne $raw.policy) { $raw.policy.name } else { $null })
             PolicyCompliance = $raw.policy_compliance_status
             Passed           = ($raw.policy_compliance_status -eq 'PASSED')
             ScanDate         = $raw.last_policy_compliance_check_date

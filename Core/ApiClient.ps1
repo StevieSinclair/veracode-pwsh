@@ -163,7 +163,7 @@ function Invoke-VcWithRetry {
     for ($attempt = 1; $attempt -le $maxRetries; $attempt++) {
         try {
             if ($AsString) {
-                $resp = Invoke-WebRequest @Params
+                $resp = Invoke-WebRequest -UseBasicParsing @Params
                 return $resp.Content
             }
             return Invoke-RestMethod @Params
@@ -172,12 +172,21 @@ function Invoke-VcWithRetry {
             $status = $null
             $body   = $null
 
-            # PowerShell 7 wraps HTTP errors in HttpRequestException with a .Response property.
+            # Handle HTTP errors — .Response exists on both PS5.1 (WebException) and PS7 (HttpRequestException).
             if ($_.Exception.Response) {
                 $status = [int]$_.Exception.Response.StatusCode
                 try {
-                    # .Content is System.Net.Http.HttpContent in PS7 (.NET 5+)
-                    $body = $_.Exception.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+                    # PS5.1: Response is System.Net.HttpWebResponse — use GetResponseStream()
+                    # PS7:   Response is System.Net.Http.HttpResponseMessage — use Content.ReadAsStringAsync()
+                    $respObj = $_.Exception.Response
+                    if ($respObj -is [System.Net.HttpWebResponse]) {
+                        $stream = $respObj.GetResponseStream()
+                        $reader = [System.IO.StreamReader]::new($stream)
+                        $body   = $reader.ReadToEnd()
+                        $reader.Dispose()
+                    } elseif ($respObj.Content) {
+                        $body = $respObj.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+                    }
                 } catch {}
             }
 
