@@ -1,4 +1,4 @@
-function Remove-VcOldSandboxes {
+﻿function Remove-VcOldSandboxes {
     <#
     .SYNOPSIS
         Deletes sandboxes for an application that have not been modified within a threshold.

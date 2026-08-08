@@ -1,4 +1,4 @@
-function Get-VcScaLicenses {
+﻿function Get-VcScaLicenses {
     <#
     .SYNOPSIS
         License risk report for SCA findings — groups open-source libraries by license

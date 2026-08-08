@@ -1,4 +1,4 @@
-# Numeric severity → human-readable label
+﻿# Numeric severity → human-readable label
 $script:VcSeverityLabels = @{
     0 = 'Informational'
     1 = 'Very Low'

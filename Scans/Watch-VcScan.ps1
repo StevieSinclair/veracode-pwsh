@@ -1,4 +1,4 @@
-function Watch-VcScan {
+﻿function Watch-VcScan {
     <#
     .SYNOPSIS
         Polls an application's current scan status and prints a live status line until

@@ -1,4 +1,4 @@
-function Get-VcApplications {
+﻿function Get-VcApplications {
     <#
     .SYNOPSIS
         Lists applications in the Veracode platform.

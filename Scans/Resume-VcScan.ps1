@@ -1,4 +1,4 @@
-function Resume-VcScan {
+﻿function Resume-VcScan {
     <#
     .SYNOPSIS
         Deletes the latest (blocking) scan for an application or sandbox so a new one can be submitted.

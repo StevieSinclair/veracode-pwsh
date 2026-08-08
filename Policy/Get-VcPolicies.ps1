@@ -1,4 +1,4 @@
-function Get-VcPolicies {
+﻿function Get-VcPolicies {
     <#
     .SYNOPSIS
         Lists all security policies in the organisation.

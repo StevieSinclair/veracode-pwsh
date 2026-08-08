@@ -1,4 +1,4 @@
-function Export-VcAnalysisReport {
+﻿function Export-VcAnalysisReport {
     <#
     .SYNOPSIS
         Generates a self-contained HTML analysis report for an application covering

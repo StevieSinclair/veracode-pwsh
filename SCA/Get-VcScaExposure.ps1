@@ -1,4 +1,4 @@
-function Get-VcScaExposure {
+﻿function Get-VcScaExposure {
     <#
     .SYNOPSIS
         Identifies vulnerable open-source libraries present across multiple applications

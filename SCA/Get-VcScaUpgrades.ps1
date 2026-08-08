@@ -1,4 +1,4 @@
-function Get-VcScaUpgrades {
+﻿function Get-VcScaUpgrades {
     <#
     .SYNOPSIS
         Generates an actionable upgrade checklist for SCA findings where a safe version

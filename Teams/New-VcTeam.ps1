@@ -1,4 +1,4 @@
-function New-VcTeam {
+﻿function New-VcTeam {
     <#
     .SYNOPSIS
         Creates a new team.

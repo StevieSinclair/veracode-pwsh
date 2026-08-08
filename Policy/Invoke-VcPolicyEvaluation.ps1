@@ -1,4 +1,4 @@
-function Invoke-VcPolicyEvaluation {
+﻿function Invoke-VcPolicyEvaluation {
     <#
     .SYNOPSIS
         Triggers a policy compliance evaluation for an application and returns the result.

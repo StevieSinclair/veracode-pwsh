@@ -1,4 +1,4 @@
-function Remove-VcTeam {
+﻿function Remove-VcTeam {
     <#
     .SYNOPSIS
         Deletes a team. Users that belong only to this team lose their team membership.

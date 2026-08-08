@@ -1,4 +1,4 @@
-function Remove-VcSandbox {
+﻿function Remove-VcSandbox {
     <#
     .SYNOPSIS
         Deletes a sandbox and all its scan history from an application.

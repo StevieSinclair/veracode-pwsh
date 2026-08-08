@@ -1,4 +1,4 @@
-function Get-VcMitigationStatus {
+﻿function Get-VcMitigationStatus {
     <#
     .SYNOPSIS
         Breaks down findings by mitigation review status and flags long-pending proposals.

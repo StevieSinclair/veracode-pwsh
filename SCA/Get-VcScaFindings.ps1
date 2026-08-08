@@ -1,4 +1,4 @@
-function Get-VcScaFindings {
+﻿function Get-VcScaFindings {
     <#
     .SYNOPSIS
         Lists Software Composition Analysis (SCA) findings for an application,

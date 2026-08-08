@@ -1,4 +1,4 @@
-function Set-VcUser {
+﻿function Set-VcUser {
     <#
     .SYNOPSIS
         Updates a user's roles, team assignments, or login status.

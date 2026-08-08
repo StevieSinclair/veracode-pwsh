@@ -1,4 +1,4 @@
-# Reads and writes .veracode\credentials relative to the module root.
+﻿# Reads and writes .veracode\credentials relative to the module root.
 # Environment variables VERACODE_API_KEY_ID / VERACODE_API_KEY_SECRET override the file.
 
 # $PSScriptRoot here is the Core\ directory; go up one level to reach the module root.

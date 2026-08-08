@@ -1,4 +1,4 @@
-function Initialize-VcCredentials {
+﻿function Initialize-VcCredentials {
     <#
     .SYNOPSIS
         Interactive wizard to configure Veracode API credentials.

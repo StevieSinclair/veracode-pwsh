@@ -1,4 +1,4 @@
-function Remove-VcScan {
+﻿function Remove-VcScan {
     <#
     .SYNOPSIS
         Deletes a specific scan (build). The scan must not be in RESULTS_READY state

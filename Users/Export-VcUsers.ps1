@@ -1,4 +1,4 @@
-function Export-VcUsers {
+﻿function Export-VcUsers {
     <#
     .SYNOPSIS
         Exports the full user roster to a CSV file.

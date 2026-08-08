@@ -1,4 +1,4 @@
-function Get-VcScaLibrarySummary {
+﻿function Get-VcScaLibrarySummary {
     <#
     .SYNOPSIS
         Groups SCA findings by library + version, showing all CVEs, max CVSS score,

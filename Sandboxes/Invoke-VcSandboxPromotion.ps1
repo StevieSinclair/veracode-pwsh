@@ -1,4 +1,4 @@
-function Invoke-VcSandboxPromotion {
+﻿function Invoke-VcSandboxPromotion {
     <#
     .SYNOPSIS
         Promotes the latest completed sandbox scan to a policy scan.

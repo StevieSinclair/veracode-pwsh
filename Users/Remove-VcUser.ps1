@@ -1,4 +1,4 @@
-function Remove-VcUser {
+﻿function Remove-VcUser {
     <#
     .SYNOPSIS
         Deletes or deactivates a Veracode user.

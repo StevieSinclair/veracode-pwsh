@@ -1,4 +1,4 @@
-function Get-VcFlawDetail {
+﻿function Get-VcFlawDetail {
     <#
     .SYNOPSIS
         Retrieves deep flaw context for a specific finding: source file, line, call chain,

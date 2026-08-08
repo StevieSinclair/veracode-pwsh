@@ -1,4 +1,4 @@
-function Compare-VcScans {
+﻿function Compare-VcScans {
     <#
     .SYNOPSIS
         Compares two builds of the same application — NEW findings introduced,

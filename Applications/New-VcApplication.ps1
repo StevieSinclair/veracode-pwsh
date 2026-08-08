@@ -1,4 +1,4 @@
-function New-VcApplication {
+﻿function New-VcApplication {
     <#
     .SYNOPSIS
         Creates a new application in Veracode.

@@ -1,4 +1,4 @@
-function Remove-VcApplication {
+﻿function Remove-VcApplication {
     <#
     .SYNOPSIS
         Deletes an application from Veracode. This is permanent and removes all scan history.

@@ -1,4 +1,4 @@
-function Start-VcDastScan {
+﻿function Start-VcDastScan {
     <#
     .SYNOPSIS
         Triggers an existing DAST analysis to run immediately by setting its start time to now.

@@ -1,4 +1,4 @@
-function Set-VcUserRoles {
+﻿function Set-VcUserRoles {
     <#
     .SYNOPSIS
         Adds or removes specific roles from one or more users without replacing the full role list.

@@ -1,4 +1,4 @@
-function New-VcUser {
+﻿function New-VcUser {
     <#
     .SYNOPSIS
         Creates a new Veracode user (human or API service account).

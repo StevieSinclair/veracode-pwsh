@@ -1,4 +1,4 @@
-function Get-VcFindingTrend {
+﻿function Get-VcFindingTrend {
     <#
     .SYNOPSIS
         Shows finding counts by severity across the last N completed builds, enabling

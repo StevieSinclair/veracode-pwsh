@@ -1,4 +1,4 @@
-function Set-VcApplication {
+﻿function Set-VcApplication {
     <#
     .SYNOPSIS
         Updates an existing application's profile. Fetches current state and merges supplied changes.

@@ -1,4 +1,4 @@
-function Set-VcSandbox {
+﻿function Set-VcSandbox {
     <#
     .SYNOPSIS
         Updates a sandbox name or auto-recreate setting.

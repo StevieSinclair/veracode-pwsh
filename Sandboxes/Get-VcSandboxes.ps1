@@ -1,4 +1,4 @@
-function Get-VcSandboxes {
+﻿function Get-VcSandboxes {
     <#
     .SYNOPSIS
         Lists all sandboxes for an application.

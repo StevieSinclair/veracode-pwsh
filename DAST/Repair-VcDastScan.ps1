@@ -1,4 +1,4 @@
-function Repair-VcDastScan {
+﻿function Repair-VcDastScan {
     <#
     .SYNOPSIS
         Detects and stops stuck DAST analyses across the org or a specific analysis.

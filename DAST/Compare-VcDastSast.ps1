@@ -1,4 +1,4 @@
-function Compare-VcDastSast {
+﻿function Compare-VcDastSast {
     <#
     .SYNOPSIS
         Compares SAST and DAST findings for the same application, highlighting CWE overlap.

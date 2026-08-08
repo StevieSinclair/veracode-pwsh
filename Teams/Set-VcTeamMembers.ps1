@@ -1,4 +1,4 @@
-function Set-VcTeamMembers {
+﻿function Set-VcTeamMembers {
     <#
     .SYNOPSIS
         Adds or removes users from a team without replacing the entire member list.

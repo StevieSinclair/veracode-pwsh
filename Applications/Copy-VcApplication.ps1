@@ -1,4 +1,4 @@
-function Copy-VcApplication {
+﻿function Copy-VcApplication {
     <#
     .SYNOPSIS
         Creates a new application by cloning the profile of an existing one.

@@ -1,4 +1,4 @@
-function Export-VcReport {
+﻿function Export-VcReport {
     <#
     .SYNOPSIS
         Generates a comprehensive org-wide snapshot report combining application compliance,

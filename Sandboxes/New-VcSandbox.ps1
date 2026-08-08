@@ -1,4 +1,4 @@
-function New-VcSandbox {
+﻿function New-VcSandbox {
     <#
     .SYNOPSIS
         Creates a new development sandbox within an application.

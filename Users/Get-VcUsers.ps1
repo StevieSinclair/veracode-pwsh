@@ -1,4 +1,4 @@
-function Get-VcUsers {
+﻿function Get-VcUsers {
     <#
     .SYNOPSIS
         Lists users in the Veracode organisation.

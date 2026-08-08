@@ -1,4 +1,4 @@
-function Get-VcAuditLog {
+﻿function Get-VcAuditLog {
     <#
     .SYNOPSIS
         Retrieves the organisation audit log (identity API).

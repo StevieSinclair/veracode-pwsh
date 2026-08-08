@@ -1,4 +1,4 @@
-function Repair-VcStuckScan {
+﻿function Repair-VcStuckScan {
     <#
     .SYNOPSIS
         Detects and removes stuck scans across one application or the entire org.

@@ -1,4 +1,4 @@
-function Stop-VcDastScan {
+﻿function Stop-VcDastScan {
     <#
     .SYNOPSIS
         Stops (cancels) a running DAST scan. The analysis configuration is preserved;

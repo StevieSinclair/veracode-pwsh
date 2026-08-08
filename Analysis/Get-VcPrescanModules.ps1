@@ -1,4 +1,4 @@
-function Get-VcPrescanModules {
+﻿function Get-VcPrescanModules {
     <#
     .SYNOPSIS
         Lists modules identified during prescan for an application build, showing

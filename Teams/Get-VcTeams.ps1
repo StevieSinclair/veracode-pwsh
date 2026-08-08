@@ -1,4 +1,4 @@
-function Get-VcTeams {
+﻿function Get-VcTeams {
     <#
     .SYNOPSIS
         Lists all teams in the Veracode organisation.

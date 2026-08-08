@@ -1,4 +1,4 @@
-function Get-VcSeverityBreakdown {
+﻿function Get-VcSeverityBreakdown {
     <#
     .SYNOPSIS
         Groups open findings by severity level, showing counts and percentage of total.

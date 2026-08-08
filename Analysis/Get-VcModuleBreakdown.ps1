@@ -1,4 +1,4 @@
-function Get-VcModuleBreakdown {
+﻿function Get-VcModuleBreakdown {
     <#
     .SYNOPSIS
         Shows which uploaded modules (JARs, DLLs, etc.) contribute the most findings,

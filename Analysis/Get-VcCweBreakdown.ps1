@@ -1,4 +1,4 @@
-function Get-VcCweBreakdown {
+﻿function Get-VcCweBreakdown {
     <#
     .SYNOPSIS
         Heat map of the top N CWEs by finding count for an application.

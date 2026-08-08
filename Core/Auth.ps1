@@ -1,4 +1,4 @@
-# Implements Veracode HMAC-SHA256 request signing.
+﻿# Implements Veracode HMAC-SHA256 request signing.
 # Spec: https://docs.veracode.com/r/c_enabling_hmac
 
 function New-VcAuthHeader {

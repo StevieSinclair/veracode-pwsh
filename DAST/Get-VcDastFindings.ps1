@@ -1,4 +1,4 @@
-function Get-VcDastFindings {
+﻿function Get-VcDastFindings {
     <#
     .SYNOPSIS
         Lists DAST (Dynamic Analysis) findings for an application, enriched with

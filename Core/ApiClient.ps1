@@ -1,4 +1,4 @@
-# HTTP client for Veracode REST and XML APIs.
+﻿# HTTP client for Veracode REST and XML APIs.
 # All API calls must go through Invoke-VcApi or Invoke-VcXmlApi — never call Invoke-RestMethod directly.
 
 $script:RestBaseUrl = 'https://api.veracode.com'

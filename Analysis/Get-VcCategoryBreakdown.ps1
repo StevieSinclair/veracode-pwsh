@@ -1,4 +1,4 @@
-function Get-VcCategoryBreakdown {
+﻿function Get-VcCategoryBreakdown {
     <#
     .SYNOPSIS
         Groups findings by Veracode vulnerability category with per-severity counts.

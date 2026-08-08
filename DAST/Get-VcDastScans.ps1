@@ -1,4 +1,4 @@
-# DAST analysis states that indicate a stuck/stalled scan
+﻿# DAST analysis states that indicate a stuck/stalled scan
 $script:VcDastStuckStates = @('RUNNING','QUEUED','AGENT_SCANNING','PENDING')
 
 function Get-VcDastScans {

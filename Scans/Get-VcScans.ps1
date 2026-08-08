@@ -1,4 +1,4 @@
-# Scan states that indicate a scan may be stuck (not progressing).
+﻿# Scan states that indicate a scan may be stuck (not progressing).
 $script:VcStuckScanStates = @(
     'INCOMPLETE'
     'PRESCAN_SUBMITTED'

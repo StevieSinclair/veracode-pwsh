@@ -1,4 +1,4 @@
-function Export-VcFindings {
+﻿function Export-VcFindings {
     <#
     .SYNOPSIS
         Exports findings for one application (or all apps) to a CSV or JSON file.

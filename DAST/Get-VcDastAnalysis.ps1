@@ -1,4 +1,4 @@
-function Get-VcDastAnalysis {
+﻿function Get-VcDastAnalysis {
     <#
     .SYNOPSIS
         Comprehensive analysis of DAST findings for an application: severity breakdown,
